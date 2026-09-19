@@ -7,13 +7,13 @@ export const contentType = 'image/png'
 export default function Image() {
   return new ImageResponse(
     (
-      <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px', background: '#f5f1e8', color: '#111827', fontFamily: 'sans-serif' }}>
-        <div style={{ fontSize: 28, letterSpacing: '-0.02em', color: '#f24822', marginBottom: 24 }}>RUPAM MAHATO</div>
-        <div style={{ display: 'flex', flexDirection: 'column', fontSize: 64, fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1.05 }}>
-          <span>Designing <span style={{ color: '#1648d8' }}>systems</span></span>
+      <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '80px', background: '#0b0c0e', color: '#eceae4', fontFamily: 'sans-serif' }}>
+        <div style={{ fontSize: 28, letterSpacing: '-0.02em', color: '#ff5a2c', marginBottom: 24 }}>RUPAM MAHATO</div>
+        <div style={{ display: 'flex', flexDirection: 'column', fontSize: 64, fontWeight: 700, letterSpacing: '-0.04em', lineHeight: 1.05 }}>
+          <span>Designing <span style={{ color: '#ff5a2c' }}>systems</span></span>
           <span>that hold their shape.</span>
         </div>
-        <div style={{ fontSize: 26, color: '#536077', marginTop: 32 }}>Backend Engineer · AI Systems · Kharagpur, IN</div>
+        <div style={{ fontSize: 26, color: '#a3a8b1', marginTop: 32 }}>Backend Engineer · AI Systems · Kharagpur, IN</div>
       </div>
     ),
     { ...size }
