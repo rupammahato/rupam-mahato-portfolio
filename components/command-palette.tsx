@@ -30,7 +30,7 @@ export default function CommandPalette({ go }: { go: (section: string) => void }
   const items = useMemo<Item[]>(() => [
     ...SECTIONS.map(s => ({ label: `Go to ${s}`, hint: 'Section', run: () => go(s) })),
     ...projects.map(p => ({ label: p.title, hint: 'Project', run: () => go('Work') })),
-    { label: 'Download résumé', hint: 'PDF', run: () => { const a = document.createElement('a'); a.href = '/rupam-mahato-resume.pdf'; a.download = ''; a.click() } },
+    { label: 'Open résumé', hint: 'Google Drive', run: () => { window.open(contact.resume, '_blank', 'noopener') } },
     { label: 'Copy email address', hint: contact.email, run: () => { navigator.clipboard?.writeText(contact.email).catch(() => { window.location.href = `mailto:${contact.email}` }) } },
     { label: 'Send an email', hint: 'mailto', run: () => { window.location.href = `mailto:${contact.email}` } },
     ...[['GitHub', contact.github], ['LinkedIn', contact.linkedin], ['Codeforces', contact.codeforces], ['LeetCode', contact.leetcode]].map(([label, url]) => ({ label, hint: 'Link', run: () => { window.open(url, '_blank', 'noopener') } })),

@@ -6,6 +6,7 @@ export const contact = {
   linkedin: 'https://linkedin.com/in/rupammahato',
   codeforces: 'https://codeforces.com/profile/DarkKnight05',
   leetcode: 'https://leetcode.com/u/DarkKnight_05/',
+  resume: 'https://drive.google.com/file/d/1-7Neo2kdEGhm3f6RZ6FyV9D3cLZSLNXC/view?usp=sharing',
 }
 export const updated = 'Sep 2026'
 

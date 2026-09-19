@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
-import { ArrowUpRight, ChevronDown, Download, Menu, X } from 'lucide-react'
+import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react'
 import { MotionConfig, motion, useReducedMotion } from 'framer-motion'
 import CommandPalette from '@/components/command-palette'
 import ProjectVisual from '@/components/project-visual'
@@ -86,7 +86,7 @@ export default function Page() {
     <header className="site-header"><div className="wrap header-inner">
       <a className="monogram" href="#top" aria-label="Rupam Mahato home">RM<span>.</span></a>
       <nav className={menuOpen ? 'nav-open' : ''} aria-label="Primary">{nav.map(item => <button key={item} className={active === item ? 'active' : ''} onClick={() => goTo(item)}>{item}</button>)}</nav>
-      <div className="header-tools"><CommandPalette go={goTo} /><a className="btn btn-sm btn-ghost header-resume" href="/rupam-mahato-resume.pdf" download>Résumé <Download size={14} /></a><button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen}>{menuOpen ? <X size={20} /> : <Menu size={20} />}</button></div>
+      <div className="header-tools"><CommandPalette go={goTo} /><a className="btn btn-sm btn-ghost header-resume" href={contact.resume} target="_blank" rel="noopener noreferrer">Résumé <ArrowUpRight size={14} /></a><button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen}>{menuOpen ? <X size={20} /> : <Menu size={20} />}</button></div>
     </div></header>
 
     <section id="top" className="hero"><div className="wrap">
@@ -94,7 +94,7 @@ export default function Page() {
         <p className="eyebrow"><i className="dot" /> Backend Engineer, AI Systems / Kharagpur, IN</p>
         <h1>Designing <em>systems</em> that hold their shape.</h1>
         <p className="hero-intro">I&apos;m Rupam Mahato, a backend and AI-systems engineer at IIT Kharagpur (graduating May 2027). I build multi-tenant RAG platforms, replay-safe payment flows and consistent-hashing load balancing.</p>
-        <div className="hero-actions"><button className="btn btn-primary" onClick={() => goTo('Work')}>Explore selected work <ArrowUpRight size={16} /></button><a className="btn btn-ghost" href="/rupam-mahato-resume.pdf" download>Résumé <Download size={15} /></a><a className="link-under" href={`mailto:${contact.email}`}>Email me <ArrowUpRight size={14} /></a></div>
+        <div className="hero-actions"><button className="btn btn-primary" onClick={() => goTo('Work')}>Explore selected work <ArrowUpRight size={16} /></button><a className="btn btn-ghost" href={contact.resume} target="_blank" rel="noopener noreferrer">Résumé <ArrowUpRight size={15} /></a><a className="link-under" href={`mailto:${contact.email}`}>Email me <ArrowUpRight size={14} /></a></div>
         <p className="availability">Open to full-time backend & AI roles · Freelance & contract available</p>
       </div>
     </div></section>

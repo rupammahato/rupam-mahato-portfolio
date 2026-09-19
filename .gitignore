@@ -18,3 +18,5 @@ node_modules
 # Private reference files (not part of the site)
 Rupam_Resume_Updated*.pdf
 *_Portfolio.pdf
+# the résumé is shared via Google Drive; never serve or commit a copy from the site
+public/*resume*.pdf
