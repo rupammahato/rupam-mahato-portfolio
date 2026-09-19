@@ -10,7 +10,8 @@ const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono'
 export const metadata: Metadata = {
   title: 'Rupam Mahato - Portfolio',
   description: 'Rupam Mahato builds backend systems, AI/RAG pipelines, and cloud infrastructure for real-world products.',
-  icons: { icon: '/icon.svg', apple: '/apple-icon.png' },
+  // ?v= busts browsers' aggressive favicon cache; bump it when the icon changes.
+  icons: { icon: [{ url: '/icon.svg?v=2', type: 'image/svg+xml' }, { url: '/icon-32.png?v=2', sizes: '32x32', type: 'image/png' }], apple: '/apple-icon.png?v=2' },
   openGraph: { title: 'Rupam Mahato — Backend Engineer', description: 'Designing systems that hold their shape.', type: 'website' },
 }
 

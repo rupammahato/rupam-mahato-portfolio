@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 import { ArrowUpRight, ChevronDown, Download, Menu, X } from 'lucide-react'
 import { MotionConfig, motion, useReducedMotion } from 'framer-motion'
 import CommandPalette from '@/components/command-palette'
-import HashRingSim from '@/components/hash-ring-sim'
 import ProjectVisual from '@/components/project-visual'
 import { awards, contact, education, experience, projects, proof, services, skillCategories, skills, updated, type Project } from '@/lib/site-data'
 
@@ -90,7 +89,7 @@ export default function Page() {
       <div className="header-tools"><CommandPalette go={goTo} /><a className="btn btn-sm btn-ghost header-resume" href="/rupam-mahato-resume.pdf" download>Résumé <Download size={14} /></a><button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen}>{menuOpen ? <X size={20} /> : <Menu size={20} />}</button></div>
     </div></header>
 
-    <section id="top" className="hero"><div className="wrap hero-grid">
+    <section id="top" className="hero"><div className="wrap">
       <div className="hero-copy">
         <p className="eyebrow"><i className="dot" /> Backend Engineer, AI Systems / Kharagpur, IN</p>
         <h1>Designing <em>systems</em> that hold their shape.</h1>
@@ -98,7 +97,6 @@ export default function Page() {
         <div className="hero-actions"><button className="btn btn-primary" onClick={() => goTo('Work')}>Explore selected work <ArrowUpRight size={16} /></button><a className="btn btn-ghost" href="/rupam-mahato-resume.pdf" download>Résumé <Download size={15} /></a><a className="link-under" href={`mailto:${contact.email}`}>Email me <ArrowUpRight size={14} /></a></div>
         <p className="availability">Open to full-time backend & AI roles · Freelance & contract available</p>
       </div>
-      <HashRingSim />
     </div></section>
 
     <section className="proof" aria-label="Highlights"><div className="wrap proof-grid">{proof.map(p => <div key={p.value}><b>{p.value}</b><span>{p.label}</span></div>)}</div></section>
