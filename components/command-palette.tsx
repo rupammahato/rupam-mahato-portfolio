@@ -48,7 +48,7 @@ export default function CommandPalette({ go }: { go: (section: string) => void }
   }
 
   return <>
-    <button className="kbd-btn" onClick={() => setOpen(true)} aria-label="Open quick jump menu" aria-haspopup="dialog"><Search size={14} /><span>Search</span><kbd>{mac ? '⌘' : 'Ctrl'} K</kbd></button>
+    <button className="kbd-btn" onClick={() => setOpen(true)} aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K"><Search size={14} /><span>Search</span><kbd>{mac ? '⌘' : 'Ctrl'} K</kbd></button>
     <dialog ref={dialog} className="palette" aria-label="Quick jump" onClose={() => setOpen(false)} onClick={e => { if (e.target === e.currentTarget) setOpen(false) }}>
       <div className="palette-box">
         <input className="palette-input" role="combobox" aria-expanded="true" aria-controls="cmd-list" aria-activedescendant={shown.length ? `cmd-${current}` : undefined} aria-label="Search sections, projects and links" placeholder="Jump to a section, project or link…" value={query} onChange={e => { setQuery(e.target.value); setActive(0) }} onKeyDown={onKeyDown} />

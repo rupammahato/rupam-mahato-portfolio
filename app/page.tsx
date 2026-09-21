@@ -54,6 +54,7 @@ export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [openExperience, setOpenExperience] = useState(0)
   const [filter, setFilter] = useState('All')
+  const [show3d, setShow3d] = useState(false)
   const filters = ['All', ...Object.keys(skillCategories)]
 
   useEffect(() => {
@@ -64,6 +65,16 @@ export default function Page() {
     }), { rootMargin: '-35% 0px -55% 0px' })
     nav.forEach(item => { const el = document.getElementById(item.toLowerCase()); if (el) observer.observe(el) })
     return () => observer.disconnect()
+  }, [])
+
+  // The only WebGL scene sits in the Stack section, far below the fold. Its three.js code is ~200 KB and blocked
+  // the main thread on phones (LCP 4.7s), so it loads only once that section is about to scroll into view.
+  useEffect(() => {
+    const el = document.getElementById('stack')
+    if (!el) return
+    const io = new IntersectionObserver(([entry]) => { if (entry.isIntersecting) { setShow3d(true); io.disconnect() } }, { rootMargin: '800px 0px' })
+    io.observe(el)
+    return () => io.disconnect()
   }, [])
 
   // Card spotlight: one delegated listener sets --mx/--my on the hovered .spot element. Skipped on touch and under reduced motion.
@@ -82,9 +93,9 @@ export default function Page() {
 
   const goTo = (item: string) => { document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }); setMenuOpen(false) }
   return <MotionConfig reducedMotion="user"><main>
-    <SceneCanvas />
+    {show3d && <SceneCanvas />}
     <header className="site-header"><div className="wrap header-inner">
-      <a className="monogram" href="#top" aria-label="Rupam Mahato home">RM<span>.</span></a>
+      <a className="monogram" href="#top" aria-label="RM, Rupam Mahato home">RM<span>.</span></a>
       <nav className={menuOpen ? 'nav-open' : ''} aria-label="Primary">{nav.map(item => <button key={item} className={active === item ? 'active' : ''} onClick={() => goTo(item)}>{item}</button>)}</nav>
       <div className="header-tools"><CommandPalette go={goTo} /><a className="btn btn-sm btn-ghost header-resume" href={contact.resume} target="_blank" rel="noopener noreferrer">Résumé <ArrowUpRight size={14} /></a><button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen}>{menuOpen ? <X size={20} /> : <Menu size={20} />}</button></div>
     </div></header>
@@ -129,7 +140,7 @@ export default function Page() {
     <section id="stack" className="section"><div className="wrap">
       <SectionLabel number="04">Stack / thinking tools</SectionLabel>
       <div className="section-head"><h2>Tools are <em>choices.</em></h2><div className="filter-row" role="group" aria-label="Filter skills">{filters.map(item => <button key={item} className={filter === item ? 'selected' : ''} onClick={() => setFilter(item)} aria-pressed={filter === item}>{item}</button>)}</div></div>
-      <div className="stack-visual"><SceneView style={{ width: '100%', height: '100%' }}><StackOrbit /></SceneView><SkillRing filter={filter} /><div className="stack-note">{filter === 'All' ? 'A small, opinionated toolkit for building things that can be understood.' : `The ${filter.toLowerCase()} tools I reach for most.`}</div></div>
+      <div className="stack-visual">{show3d && <SceneView style={{ width: '100%', height: '100%' }}><StackOrbit /></SceneView>}<SkillRing filter={filter} /><div className="stack-note">{filter === 'All' ? 'A small, opinionated toolkit for building things that can be understood.' : `The ${filter.toLowerCase()} tools I reach for most.`}</div></div>
     </div></section>
 
     <section id="contact" className="section contact"><div className="wrap">

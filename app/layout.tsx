@@ -8,6 +8,8 @@ const geist = Geist({ subsets: ['latin'], variable: '--font-geist-sans' })
 const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://rupam-mahato-portfolio.vercel.app'),
+  alternates: { canonical: '/' },
   title: 'Rupam Mahato - Portfolio',
   description: 'Rupam Mahato builds backend systems, AI/RAG pipelines, and cloud infrastructure for real-world products.',
   // ?v= busts browsers' aggressive favicon cache; bump it when the icon changes.
