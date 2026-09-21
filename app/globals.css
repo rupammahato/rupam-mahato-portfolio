@@ -9,7 +9,7 @@
   --sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
   --pad: clamp(20px, 5vw, 72px);
-  /* shadcn token names used by components/ui */
+  /* aliases for the Tailwind theme block below */
   --background: var(--bg); --foreground: var(--fg); --border: var(--line); --radius: .5rem;
 }
 @theme inline {
