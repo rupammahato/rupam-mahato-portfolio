@@ -1,0 +1,19 @@
+{
+  "socialImageBytes": 75812,
+  "renderChecks": [
+    {
+      "coarse": true,
+      "devicePixelRatio": 3,
+      "cssWidth": 350,
+      "bufferWidth": 350,
+      "renderRatio": 1
+    },
+    {
+      "coarse": false,
+      "devicePixelRatio": 3,
+      "cssWidth": 624,
+      "bufferWidth": 936,
+      "renderRatio": 1.5
+    }
+  ]
+}

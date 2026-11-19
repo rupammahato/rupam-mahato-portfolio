@@ -1,0 +1,253 @@
+<style>
+  #rm-motion-preview {
+    --rm-bg: light-dark(#f5f3ed, #0b0e12);
+    --rm-panel: light-dark(#eeebe3, #131a22);
+    --rm-ink: light-dark(#20251f, #eeeee7);
+    --rm-muted: light-dark(#62665e, #a4adb6);
+    --rm-line: light-dark(#d3d2c8, #2a3541);
+    --rm-accent: #ed683c;
+    --rm-blue: light-dark(#387991, #8db5cf);
+    color: var(--rm-ink);
+    background: var(--rm-bg);
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    padding: 28px 30px 30px;
+    overflow: clip;
+    isolation: isolate;
+  }
+  #rm-motion-preview * { box-sizing: border-box; }
+  #rm-motion-preview button, #rm-motion-preview a { font: inherit; color: inherit; }
+  #rm-motion-preview button { cursor: pointer; }
+  #rm-motion-preview a { text-decoration: none; }
+  #rm-motion-preview .rm-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 24px; border-bottom: 1px solid var(--rm-line); }
+  #rm-motion-preview .rm-brand { display: flex; align-items: center; gap: 15px; }
+  #rm-motion-preview .rm-logo { color: var(--rm-accent); font-size: 25px; letter-spacing: -2px; font-weight: 750; }
+  #rm-motion-preview .rm-name { font-size: 13px; font-weight: 550; }
+  #rm-motion-preview .rm-nav { display: flex; gap: 22px; font-size: 12px; color: var(--rm-muted); margin-right: 72px; }
+  #rm-motion-preview .rm-nav a:hover { color: var(--rm-ink); }
+  #rm-motion-preview .rm-hero { display: grid; grid-template-columns: 1fr 1.05fr; align-items: center; gap: 12px; padding: 38px 0 24px; }
+  #rm-motion-preview .rm-eyebrow { font: 11px/1.6 ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--rm-muted); margin-bottom: 19px; }
+  #rm-motion-preview .rm-eyebrow::before { content: ''; display: inline-block; width: 6px; height: 6px; margin-right: 8px; border-radius: 50%; background: var(--rm-accent); }
+  #rm-motion-preview h1 { font-size: clamp(36px, 5.4vw, 58px); line-height: 1.04; letter-spacing: -.055em; font-weight: 600; margin: 0 0 22px; }
+  #rm-motion-preview h1 em { font-family: Georgia, serif; color: var(--rm-accent); font-weight: 400; }
+  #rm-motion-preview .rm-intro { font-size: 14px; line-height: 1.7; max-width: 38ch; margin: 0; color: var(--rm-muted); }
+  #rm-motion-preview .rm-actions { display: flex; align-items: center; gap: 18px; margin: 26px 0 19px; }
+  #rm-motion-preview .rm-cta { display: inline-flex; gap: 15px; align-items: center; padding: 12px 16px; border-radius: 4px; background: var(--rm-accent); color: #14110f; font-size: 12px; font-weight: 650; }
+  #rm-motion-preview .rm-resume { font-size: 12px; color: var(--rm-muted); border-bottom: 1px solid var(--rm-line); padding: 8px 0; }
+  #rm-motion-preview .rm-available { color: var(--rm-muted); font-size: 11px; line-height: 1.6; }
+  #rm-motion-preview .rm-model { position: relative; min-width: 0; }
+  #rm-motion-preview .rm-model-top { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding-left: 12px; }
+  #rm-motion-preview .rm-model-label { font: 10px/1.5 ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--rm-muted); }
+  #rm-motion-preview .rm-play { border: 1px solid var(--rm-line); border-radius: 4px; background: var(--rm-panel); padding: 8px 11px; font-size: 11px; min-width: 78px; }
+  #rm-motion-preview .rm-scene { display: block; width: 100%; height: 335px; touch-action: pan-y; cursor: grab; }
+  #rm-motion-preview .rm-scene:active { cursor: grabbing; }
+  #rm-motion-preview .rm-model-caption { margin: -8px 0 17px; text-align: center; font: 11px/1.5 ui-monospace, monospace; color: var(--rm-muted); }
+  #rm-motion-preview .rm-modes { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+  #rm-motion-preview .rm-mode { border: 1px solid var(--rm-line); background: transparent; color: var(--rm-muted); padding: 9px 11px; font-size: 11px; border-radius: 5px; }
+  #rm-motion-preview .rm-mode[aria-pressed="true"] { color: var(--rm-ink); background: var(--rm-panel); border-color: var(--rm-accent); }
+  #rm-motion-preview .rm-proof { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--rm-line); margin: 18px 0 32px; padding: 21px 0; }
+  #rm-motion-preview .rm-proof-item { padding: 0 20px; border-left: 1px solid var(--rm-line); }
+  #rm-motion-preview .rm-proof-item:first-child { border: none; padding-left: 0; }
+  #rm-motion-preview .rm-proof-value { font-size: 27px; font-weight: 550; letter-spacing: -.05em; }
+  #rm-motion-preview .rm-proof-detail { font-size: 11px; color: var(--rm-muted); margin-top: 5px; line-height: 1.5; }
+  #rm-motion-preview .rm-work-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 20px; }
+  #rm-motion-preview .rm-work-head h2 { font-size: 25px; letter-spacing: -.035em; margin: 0; font-weight: 550; }
+  #rm-motion-preview .rm-work-head span { font: 10px ui-monospace, monospace; color: var(--rm-muted); }
+  #rm-motion-preview .rm-project { display: grid; grid-template-columns: 1fr 1fr; background: var(--rm-panel); border: 1px solid var(--rm-line); border-radius: 5px; overflow: hidden; }
+  #rm-motion-preview .rm-project-scene { min-height: 208px; position: relative; display: grid; place-items: center; perspective: 700px; }
+  #rm-motion-preview .rm-mini-ring { width: 140px; height: 140px; border: 1px solid var(--rm-blue); border-radius: 50%; transform: rotateX(55deg) rotateZ(-20deg); position: relative; }
+  #rm-motion-preview .rm-mini-ring::before { content: ''; position: absolute; inset: -19px; border: 1px solid var(--rm-line); border-radius: 50%; }
+  #rm-motion-preview .rm-mini-ring i { position: absolute; width: 12px; height: 12px; border-radius: 3px; background: var(--rm-bg); border: 1px solid var(--rm-blue); }
+  #rm-motion-preview .rm-mini-ring i:nth-child(1) { left: 63px; top: -6px; }
+  #rm-motion-preview .rm-mini-ring i:nth-child(2) { right: -6px; top: 63px; }
+  #rm-motion-preview .rm-mini-ring i:nth-child(3) { left: 63px; bottom: -6px; }
+  #rm-motion-preview .rm-mini-ring i:nth-child(4) { left: -6px; top: 63px; }
+  #rm-motion-preview .rm-mini-ring b { position: absolute; left: 63px; top: 63px; width: 12px; height: 12px; background: var(--rm-accent); border-radius: 50%; box-shadow: 0 0 25px color-mix(in srgb, var(--rm-accent) 40%, transparent); }
+  #rm-motion-preview .rm-project-copy { padding: 25px; align-self: center; }
+  #rm-motion-preview .rm-project-type { font: 10px ui-monospace, monospace; color: var(--rm-muted); text-transform: uppercase; letter-spacing: .06em; }
+  #rm-motion-preview .rm-project-copy h3 { font-size: 20px; line-height: 1.2; font-weight: 550; letter-spacing: -.025em; margin: 12px 0; }
+  #rm-motion-preview .rm-project-copy p { font-size: 12px; line-height: 1.6; color: var(--rm-muted); margin: 0; }
+  #rm-motion-preview .rm-project-result { display: block; color: var(--rm-accent); margin-top: 14px; font-size: 13px; }
+  #rm-motion-preview .rm-footer { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; font: 10px/1.5 ui-monospace, monospace; color: var(--rm-muted); padding-top: 22px; }
+  @media (max-width: 680px) {
+    #rm-motion-preview { padding: 20px; }
+    #rm-motion-preview .rm-nav { gap: 15px; margin-right: 0; }
+    #rm-motion-preview .rm-name { display: none; }
+    #rm-motion-preview .rm-hero { grid-template-columns: 1fr; gap: 30px; }
+    #rm-motion-preview h1 { font-size: clamp(37px, 8vw, 56px); max-width: 15ch; }
+    #rm-motion-preview .rm-intro { max-width: 48ch; }
+    #rm-motion-preview .rm-scene { height: 310px; }
+    #rm-motion-preview .rm-proof { grid-template-columns: 1fr 1fr; row-gap: 24px; }
+    #rm-motion-preview .rm-proof-item:nth-child(3) { padding-left: 0; border: none; }
+    #rm-motion-preview .rm-project { grid-template-columns: 1fr; }
+    #rm-motion-preview .rm-project-scene { min-height: 185px; }
+    #rm-motion-preview .rm-work-head span { display: none; }
+    #rm-motion-preview .rm-play, #rm-motion-preview .rm-mode { min-height: 44px; }
+  }
+  @media (prefers-reduced-motion: reduce) { #rm-motion-preview * { scroll-behavior: auto; } }
+</style>
+<div id="rm-motion-preview" aria-label="Rupam Mahato living systems portfolio concept">
+  <header class="rm-header">
+    <div class="rm-brand"><span class="rm-logo">RM.</span><span class="rm-name">Rupam Mahato</span></div>
+    <nav class="rm-nav" aria-label="Preview navigation"><a href="#rm-preview-work">Work</a><a href="mailto:rupammahato593@gmail.com">Contact ↗</a></nav>
+  </header>
+  <section class="rm-hero">
+    <div class="rm-hero-copy">
+      <div class="rm-eyebrow">Backend engineering · AI systems</div>
+      <h1>Designing <em>systems</em> that hold their shape.</h1>
+      <p class="rm-intro">I'm Rupam Mahato, a backend and AI-systems engineer at IIT Kharagpur (graduating May 2027).</p>
+      <div class="rm-actions"><a class="rm-cta" href="#rm-preview-work">Explore selected work <span aria-hidden="true">↗</span></a><a class="rm-resume" href="https://drive.google.com/file/d/1-7Neo2kdEGhm3f6RZ6FyV9D3cLZSLNXC/view?usp=sharing" target="_blank" rel="noopener noreferrer">Résumé ↗</a></div>
+      <div class="rm-available">Open to full-time backend &amp; AI roles · Kharagpur, IN</div>
+    </div>
+    <div class="rm-model" aria-label="Interactive systems model">
+      <div class="rm-model-top"><span class="rm-model-label">Inside the system / illustrative model</span><button class="rm-play" type="button" aria-pressed="false">Pause motion</button></div>
+      <canvas class="rm-scene" role="img" aria-label="Three-dimensional hash ring with five server nodes and moving request markers. Drag to change the view.">Conceptual system model: requests travel around a consistent-hashing ring between five servers.</canvas>
+      <div class="rm-model-caption" aria-live="polite">Consistent hashing · drag to orbit</div>
+      <div class="rm-modes" role="group" aria-label="Choose the system story"><button class="rm-mode" type="button" data-mode="routing" aria-pressed="true">Traffic routing</button><button class="rm-mode" type="button" data-mode="rag" aria-pressed="false">AI knowledge</button><button class="rm-mode" type="button" data-mode="product" aria-pressed="false">Product flow</button></div>
+    </div>
+  </section>
+  <div class="rm-proof" aria-label="Career highlights">
+    <div class="rm-proof-item"><div class="rm-proof-value">5K+</div><div class="rm-proof-detail">concurrent users<br>Megalith registration peaks</div></div>
+    <div class="rm-proof-item"><div class="rm-proof-value">2,046</div><div class="rm-proof-detail">requests / second<br>load-balancer benchmark</div></div>
+    <div class="rm-proof-item"><div class="rm-proof-value">26 days</div><div class="rm-proof-detail">payments-live MVP<br>built at Zyke</div></div>
+    <div class="rm-proof-item"><div class="rm-proof-value">93</div><div class="rm-proof-detail">routes re-authenticated<br>across origins at 10X Analysts</div></div>
+  </div>
+  <section id="rm-preview-work" class="rm-work">
+    <div class="rm-work-head"><h2>Selected work</h2><span>PRODUCT CONTEXT / ENGINEERING DEPTH</span></div>
+    <article class="rm-project">
+      <div class="rm-project-scene" aria-hidden="true"><div class="rm-mini-ring"><i></i><i></i><i></i><i></i><b></b></div></div>
+      <div class="rm-project-copy"><span class="rm-project-type">Distributed systems / 2026</span><h3>Consistent Hashing Load Balancer</h3><p>Virtual nodes, automatic failover and health checks. A live console makes request routing visible.</p><span class="rm-project-result">19.66% key remapping on node failure</span></div>
+    </article>
+  </section>
+  <footer class="rm-footer"><span>Motion concept · existing portfolio content</span><span>Pointer orbit / switch stories / pause motion</span></footer>
+</div>
+<script>
+(() => {
+  const root = document.getElementById('rm-motion-preview');
+  if (!root) return;
+  const canvas = root.querySelector('.rm-scene');
+  const ctx = canvas.getContext('2d');
+  const pauseButton = root.querySelector('.rm-play');
+  const caption = root.querySelector('.rm-model-caption');
+  const modeButtons = Array.from(root.querySelectorAll('.rm-mode'));
+  if (!ctx) { caption.textContent = 'Traffic routing · AI knowledge · product flow'; return; }
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const settings = { speed: 1, depth: 1, accent: '#ed683c' };
+  const scenes = {
+    routing: { caption: 'Consistent hashing · drag to orbit', label: 'Three-dimensional hash ring with five server nodes and moving request markers. Drag to change the view.' },
+    rag: { caption: 'Separate tenants. Separate knowledge bases.', label: 'Three isolated knowledge-index stacks with document markers flowing through separate lanes. Drag to change the view.' },
+    product: { caption: 'A product story · need → build → ship → learn', label: 'Four connected three-dimensional stages show a conceptual product workflow: need, build, ship and learn. Drag to change the view.' }
+  };
+  let mode = 'routing', paused = reduced.matches, visible = true;
+  let width = 440, height = 335, yaw = -.45, pitch = .64;
+  let clock = 1.2, last = 0, frameId = 0, pointer = null, colors = {};
+  function applySaved(saved) {
+    const data = saved && saved.modelContent;
+    if (data && scenes[data.scene]) mode = data.scene;
+    if (data && typeof data.paused === 'boolean') paused = reduced.matches || data.paused;
+  }
+  applySaved(window.openai && window.openai.widgetState);
+  function persist() {
+    if (window.openai && window.openai.setWidgetState) {
+      window.openai.setWidgetState({ modelContent: { scene: mode, paused }, privateContent: null }).catch(() => {});
+    }
+  }
+  function readColors() {
+    const style = getComputedStyle(root);
+    const probe = document.createElement('span');
+    probe.style.display = 'none'; root.appendChild(probe);
+    function resolved(token) { probe.style.color = style.getPropertyValue(token).trim(); return getComputedStyle(probe).color; }
+    colors = { line: resolved('--rm-line'), ink: resolved('--rm-ink'), muted: resolved('--rm-muted'), panel: resolved('--rm-panel'), blue: resolved('--rm-blue'), accent: settings.accent };
+    probe.remove();
+  }
+  function project([x, y, z]) {
+    const angle = yaw + Math.sin(clock * .11) * .035;
+    const ax = x * Math.cos(angle) + z * Math.sin(angle);
+    const az = -x * Math.sin(angle) + z * Math.cos(angle);
+    const ay = y * Math.cos(pitch) - az * Math.sin(pitch);
+    const depth = y * Math.sin(pitch) + az * Math.cos(pitch);
+    const perspective = 6 / (6 - depth * settings.depth * .65);
+    const scale = Math.min(width, height * 1.3) * .22 * perspective;
+    return { x: width * .5 + ax * scale, y: height * .53 - ay * scale, z: depth, scale };
+  }
+  function line(points, color = colors.line, alpha = 1, weight = 1) {
+    if (!points.length) return;
+    ctx.beginPath(); points.forEach((v, i) => { const p = project(v); if (i) ctx.lineTo(p.x,p.y); else ctx.moveTo(p.x,p.y); });
+    ctx.strokeStyle = color; ctx.globalAlpha = alpha; ctx.lineWidth = weight; ctx.stroke(); ctx.globalAlpha = 1;
+  }
+  function dot(point, radius = 3, color = colors.accent, glow = false) {
+    const p = project(point); ctx.beginPath(); ctx.arc(p.x,p.y,radius,0,Math.PI*2);
+    ctx.fillStyle = color; ctx.shadowColor = color; ctx.shadowBlur = glow ? 13 : 0; ctx.fill(); ctx.shadowBlur = 0;
+  }
+  function label(point, text, dy = -18) {
+    const p = project(point); ctx.font = '11px ui-monospace, monospace'; ctx.textAlign = 'center'; ctx.fillStyle = colors.muted; ctx.fillText(text,p.x,p.y+dy);
+  }
+  function box(center, size, color = colors.blue, alpha = .16) {
+    const vertices = [[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]].map(v => v.map((n,i) => center[i]+n*size[i]/2));
+    const faces = [[0,1,2,3],[4,5,6,7],[0,4,7,3],[1,5,6,2],[0,1,5,4],[3,2,6,7]];
+    faces.map(indices => ({ indices, depth: indices.reduce((sum,i) => sum+project(vertices[i]).z,0)/4 })).sort((a,b)=>a.depth-b.depth).forEach(({indices}) => {
+      ctx.beginPath(); indices.forEach((index,i) => { const p=project(vertices[index]); if(i)ctx.lineTo(p.x,p.y);else ctx.moveTo(p.x,p.y); }); ctx.closePath();
+      ctx.fillStyle=color;ctx.globalAlpha=alpha;ctx.fill();ctx.globalAlpha=.65;ctx.strokeStyle=color;ctx.lineWidth=.8;ctx.stroke();ctx.globalAlpha=1;
+    });
+  }
+  function plane() {
+    for(let i=-5;i<=5;i++) { const p=i*.48;line([[-2.4,-.53,p],[2.4,-.53,p]],colors.line,.44);line([[p,-.53,-2.4],[p,-.53,2.4]],colors.line,.44); }
+  }
+  function ringPoint(angle, radius=1.55, y=0) { return [Math.cos(angle)*radius,y,Math.sin(angle)*radius]; }
+  function routing() {
+    [1.55,1.9].forEach((r,index) => line(Array.from({length:97},(_,i)=>ringPoint(i/96*Math.PI*2,r,index?-.25:0)),index?colors.line:colors.blue,index?.65:.85));
+    for(let i=0;i<48;i++) { const a=i/48*Math.PI*2;line([ringPoint(a,1.51),ringPoint(a,1.59)],colors.blue,.55); }
+    const nodes=Array.from({length:5},(_,i)=>({ a:i/5*Math.PI*2, title:'node '+String.fromCharCode(65+i) })).sort((a,b)=>project(ringPoint(a.a)).z-project(ringPoint(b.a)).z);
+    nodes.forEach(({a,title}) => { const p=ringPoint(a);box([p[0],.13,p[2]],[.38,.29,.38]);dot([p[0],.31,p[2]],2);label([p[0],.4,p[2]],title,-9); });
+    box([0,-.06,0],[.52,.11,.52],colors.accent,.2);
+    for(let i=0;i<7;i++) { const a=clock*.55+i*.9;line(Array.from({length:14},(_,j)=>ringPoint(a-j*.016)),colors.accent,.7,1.7);dot(ringPoint(a,1.55,.035),3.1,colors.accent,true); }
+  }
+  function knowledge() {
+    [-1.45,0,1.45].forEach((x,i)=>{
+      line([[x,-.48,-1.75],[x,-.48,1.9]],colors.line,.9);
+      for(let level=0;level<3;level++) box([x,-.22+level*.2,-.75],[.72,.12,.75],colors.blue,.12);
+      label([x,.63,-.75],'NGO '+String.fromCharCode(65+i),-9);
+      for(let j=0;j<3;j++) {const progress=(clock*.2+j/3+i*.12)%1;const z=1.65-progress*2.35;box([x,.04+Math.sin(progress*Math.PI)*.12,z],[.24,.035,.32],colors.accent,.24);dot([x,.08,z],2.6,colors.accent,true);}
+      line([[x-.52,-.48,-1.25],[x-.52,-.48,1.8]],colors.blue,.2);line([[x+.52,-.48,-1.25],[x+.52,-.48,1.8]],colors.blue,.2);
+    });
+  }
+  function product() {
+    const stages=[[-1.85,0,.35],[-.65,.25,-.15],[.65,.1,.15],[1.85,.45,-.35]];
+    line(stages,colors.blue,.7,1.2);
+    stages.forEach((p,i)=>{box(p,[.66,.14,.78],i===2?colors.accent:colors.blue,.15);box([p[0],p[1]+.25,p[2]],[.36,.35,.32],colors.blue,.1);label([p[0],p[1]+.63,p[2]],['Need','Build','Ship','Learn'][i],-4);});
+    const progress=(clock*.23)%3, segment=Math.floor(progress), mix=progress-segment;
+    const a=stages[segment],b=stages[segment+1],point=a.map((n,i)=>n+(b[i]-n)*mix);point[1]+=.18;dot(point,4,colors.accent,true);
+  }
+  function draw() { ctx.clearRect(0,0,width,height);plane();if(mode==='routing')routing();else if(mode==='rag')knowledge();else product(); }
+  function isRunning() { return !paused && visible && !document.hidden; }
+  function animate(now) { frameId=0;if(!root.isConnected)return;if(last)clock+=Math.min((now-last)/1000,.05)*settings.speed;last=now;draw();if(isRunning())frameId=requestAnimationFrame(animate); }
+  function schedule() { if(isRunning()&&!frameId){last=0;frameId=requestAnimationFrame(animate);}else if(!isRunning()&&frameId){cancelAnimationFrame(frameId);frameId=0;} }
+  function update() {
+    caption.textContent=scenes[mode].caption;canvas.setAttribute('aria-label',scenes[mode].label);
+    modeButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));
+    pauseButton.textContent=paused?'Play motion':'Pause motion';pauseButton.setAttribute('aria-pressed',String(paused));draw();schedule();
+  }
+  function resize() {
+    const bounds=canvas.getBoundingClientRect();width=Math.max(1,bounds.width);height=Math.max(1,bounds.height);
+    const dpr=Math.min(window.devicePixelRatio||1,1.5);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);readColors();draw();
+  }
+  modeButtons.forEach(button=>button.addEventListener('click',()=>{mode=button.dataset.mode;update();persist();}));
+  pauseButton.addEventListener('click',()=>{paused=!paused;update();persist();});
+  canvas.addEventListener('pointerdown',event=>{pointer={x:event.clientX,y:event.clientY};canvas.setPointerCapture(event.pointerId);});
+  canvas.addEventListener('pointermove',event=>{if(!pointer)return;yaw+=(event.clientX-pointer.x)*.008;pitch=Math.max(.15,Math.min(1.15,pitch+(event.clientY-pointer.y)*.006));pointer={x:event.clientX,y:event.clientY};draw();});
+  canvas.addEventListener('pointerup',()=>{pointer=null;});canvas.addEventListener('pointercancel',()=>{pointer=null;});
+  document.addEventListener('visibilitychange',schedule);
+  reduced.addEventListener('change',()=>{if(reduced.matches)paused=true;update();});
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{readColors();draw();});
+  const appearance=new MutationObserver(()=>{readColors();draw();});appearance.observe(document.documentElement,{attributes:true,attributeFilter:['class','style','data-theme']});
+  const observer=new ResizeObserver(resize);observer.observe(canvas);
+  const visibility=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;schedule();});visibility.observe(root);
+  window.addEventListener('openai:set_globals',event=>{if(event.detail&&event.detail.globals){applySaved(event.detail.globals.widgetState);update();}});
+  resize();update();
+  if(globalThis.Tweak) {
+    const tweak=new Tweak({container:root.querySelector('.rm-model'),onChange:()=>{root.style.setProperty('--rm-accent',settings.accent);readColors();draw();}});
+    tweak.addSlider(settings,'speed',{label:'Motion pace',min:.25,max:1.75,step:.05});
+    tweak.addSlider(settings,'depth',{label:'Perspective depth',min:.3,max:1.4,step:.05});
+    tweak.addColorPicker(settings,'accent',{label:'Signal color',reference:'--rm-accent'});
+  }
+})();
+</script>

@@ -1,0 +1,27 @@
+.visual { margin: 0; min-width: 0; }
+.toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); padding-block: var(--space-3); border-block: 1px solid var(--line); }
+.kicker { color: var(--fg-3); font: 500 var(--text-xs)/1.5 var(--mono); }
+.kicker > span { color: var(--accent); margin-right: var(--space-2); }
+.motionButton { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 44px; padding: var(--space-2) var(--space-3); border: 1px solid var(--line-strong); border-radius: var(--radius-control); font: 500 var(--text-xs)/1.4 var(--sans); color: var(--fg-2); transition: border-color var(--motion-fast) var(--ease-out), color var(--motion-fast) var(--ease-out); }
+.motionButton:hover:not(:disabled) { border-color: var(--fg-3); color: var(--fg); }
+.motionButton:disabled { opacity: .65; cursor: default; }
+.stage { position: relative; height: clamp(360px, 40vw, 500px); isolation: isolate; background: radial-gradient(ellipse at 50% 55%, color-mix(in srgb, var(--diagram-accent) 5%, transparent), transparent 68%); }
+.fallback, .canvas { position: absolute; inset: 0; }
+.fallback[hidden] { display: none; }
+.canvas { pointer-events: none; }
+.still { display: block; width: 100%; height: 100%; }
+.status, .annotation { position: absolute; bottom: var(--space-4); color: var(--fg-3); font: 400 var(--text-xs)/1.5 var(--mono); pointer-events: none; }
+.status { left: 0; }
+.annotation { right: 0; }
+.caption { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); border-top: 1px solid var(--line); padding-top: var(--space-4); font-size: var(--text-xs); color: var(--fg-2); }
+.caption span { display: flex; gap: var(--space-2); }
+.caption b { color: var(--fg-3); font: 400 var(--text-xs)/1.65 var(--mono); }
+@media (max-width: 520px) {
+  .stage { height: 350px; }
+  .caption { gap: var(--space-3); }
+  .caption span { flex-direction: column; gap: var(--space-1); }
+  .status, .annotation { position: static; display: block; padding-top: var(--space-1); }
+  .stage { margin-bottom: var(--space-8); }
+  .status { position: absolute; bottom: 0; }
+  .annotation { position: absolute; bottom: -22px; }
+}

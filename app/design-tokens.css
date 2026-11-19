@@ -1,0 +1,66 @@
+:root {
+  color-scheme: dark;
+
+  --bg: #0b0c0e;
+  --panel: #111316;
+  --panel-2: #171a1e;
+  --line: rgba(255, 255, 255, .12);
+  --line-strong: rgba(255, 255, 255, .24);
+  --fg: #eceae4;
+  --fg-2: #a3a8b1;
+  --fg-3: #9299a3;
+  --accent: #ff5a2c;
+  --accent-fg: var(--bg);
+  --diagram-accent: #6f8cff;
+  --ok: #4ade80;
+
+  --sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --text-xs: .75rem;
+  --text-sm: .875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-lead: clamp(1.0625rem, 1rem + .3vw, 1.25rem);
+  --text-display: clamp(2.75rem, 1.5rem + 5vw, 6rem);
+  --text-heading: clamp(2rem, 1.25rem + 3vw, 3.75rem);
+  --text-title: clamp(1.25rem, 1.125rem + .5vw, 1.5rem);
+  --leading-body: 1.65;
+  --leading-heading: 1.08;
+  --tracking-heading: -.045em;
+  --measure-copy: 65ch;
+
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --content-width: 81rem;
+  --pad: clamp(1.25rem, 5vw, 4.5rem);
+  --section-space: clamp(4.5rem, 8vw, 7rem);
+  --header-height: 4.25rem;
+  --anchor-gap: var(--space-6);
+
+  --radius-sm: .25rem;
+  --radius-control: .5rem;
+  --radius-panel: .75rem;
+  --motion-fast: 160ms;
+  --motion-base: 240ms;
+  --motion-enter: 400ms;
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+
+  --background: var(--bg);
+  --foreground: var(--fg);
+  --border: var(--line);
+  --radius: var(--radius-control);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-base: 0ms;
+    --motion-enter: 0ms;
+  }
+}
